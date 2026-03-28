@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Gentle Steps — your calm, private mental wellness space. Works fully offline."/>
+<meta name="theme-color" content="#3a9494"/>
+<script>
+// ── INLINE PWA MANIFEST (blob trick — no separate file needed) ──
+(function() {
+  const manifest = {
+    name: "Gentle Steps",
+    short_name: "Gentle Steps",
+    description: "Your calm, private mental wellness space. Works fully offline.",
+    start_url: "./",
+    display: "standalone",
+    background_color: "#e4f4f4",
+    theme_color: "#3a9494",
+    orientation: "portrait-primary",
+    categories: ["health", "lifestyle"],
+    icons: [
+      {
+        src: "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%23e4f4f4'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%233a9494'/><stop offset='100%25' stop-color='%235aaed4'/></linearGradient></defs><ellipse cx='68' cy='118' rx='22' ry='38' fill='url(%23g)' opacity='.35' transform='rotate(-12 68 118)'/><ellipse cx='58' cy='80' rx='8' ry='11' fill='url(%23g)' opacity='.35' transform='rotate(-12 58 80)'/><ellipse cx='74' cy='73' rx='8' ry='11' fill='url(%23g)' opacity='.35' transform='rotate(-12 74 73)'/><ellipse cx='90' cy='75' rx='7.5' ry='10' fill='url(%23g)' opacity='.35' transform='rotate(-12 90 75)'/><ellipse cx='124' cy='74' rx='22' ry='38' fill='url(%23g)' opacity='.85' transform='rotate(12 124 74)'/><ellipse cx='114' cy='36' rx='8' ry='11' fill='url(%23g)' opacity='.85' transform='rotate(12 114 36)'/><ellipse cx='130' cy='32' rx='8' ry='11' fill='url(%23g)' opacity='.85' transform='rotate(12 130 32)'/><ellipse cx='146' cy='36' rx='7.5' ry='10' fill='url(%23g)' opacity='.85' transform='rotate(12 146 36)'/><path d='M20 155 Q96 142 172 155' stroke='url(%23g)' stroke-width='7' stroke-linecap='round' opacity='.3' fill='none'/></svg>`),
+        sizes: "192x192",
+        type: "image/svg+xml",
+        purpose: "any maskable"
+      },
+      {
+        src: "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%23e4f4f4'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%233a9494'/><stop offset='100%25' stop-color='%235aaed4'/></linearGradient></defs><ellipse cx='180' cy='310' rx='58' ry='100' fill='url(%23g)' opacity='.35' transform='rotate(-12 180 310)'/><ellipse cx='154' cy='210' rx='21' ry='30' fill='url(%23g)' opacity='.35' transform='rotate(-12 154 210)'/><ellipse cx='196' cy='192' rx='21' ry='30' fill='url(%23g)' opacity='.35' transform='rotate(-12 196 192)'/><ellipse cx='238' cy='198' rx='20' ry='27' fill='url(%23g)' opacity='.35' transform='rotate(-12 238 198)'/><ellipse cx='330' cy='196' rx='58' ry='100' fill='url(%23g)' opacity='.85' transform='rotate(12 330 196)'/><ellipse cx='304' cy='96' rx='21' ry='30' fill='url(%23g)' opacity='.85' transform='rotate(12 304 96)'/><ellipse cx='346' cy='84' rx='21' ry='30' fill='url(%23g)' opacity='.85' transform='rotate(12 346 84)'/><ellipse cx='388' cy='96' rx='20' ry='27' fill='url(%23g)' opacity='.85' transform='rotate(12 388 96)'/><path d='M52 412 Q256 378 460 412' stroke='url(%23g)' stroke-width='18' stroke-linecap='round' opacity='.3' fill='none'/></svg>`),
+        sizes: "512x512",
+        type: "image/svg+xml",
+        purpose: "any maskable"
+      }
+    ]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  const url  = URL.createObjectURL(blob);
+  const link = document.createElement('link');
+  link.rel   = 'manifest';
+  link.href  = url;
+  document.head.appendChild(link);
+})();
+</script>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="Gentle Steps"/>
+<title>Gentle Steps — Your Safe Space</title>
+<style>
+:root {
+  --rose: #4e9e9e;
+  --peach: #6dbdaa;
+  --gold: #a3cfc4;
+  --sage: #5aab9e;
+  --sky: #6aafd4;
+  --lavender: #8aaed4;
+  --cream: #eef6f6;
+  --warm-white: #f4fafa;
+  --text: #1c3838;
+  --text-soft: #477070;
+  --card-bg: rgba(255,255,255,0.84);
+  --shadow: 0 8px 32px rgba(70,140,140,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(150deg, #e4f4f4 0%, #d8eef7 35%, #e0e8f8 68%, #ebe4f5 100%);
+  min-height: 100vh;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── BLOBS ── */
+.blob {
+  position: fixed; border-radius: 50%; filter: blur(60px);
+  opacity: 0.25; pointer-events: none; z-index: 0;
+  animation: blobFloat 12s ease-in-out infinite alternate;
+}
+.blob1 { width:340px; height:340px; background:#7ecece; top:-80px; left:-80px; animation-delay:0s; }
+.blob2 { width:260px; height:260px; background:#90b8e8; bottom:10%; right:-60px; animation-delay:3s; }
+.blob3 { width:200px; height:200px; background:#b0d8cc; bottom:30%; left:5%; animation-delay:6s; }
+@keyframes blobFloat { from { transform: scale(1) translateY(0); } to { transform: scale(1.12) translateY(-20px); } }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(240,250,250,0.96); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(78,158,158,0.15);
+  padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  box-shadow: 0 2px 16px rgba(70,140,140,0.07);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  font-family: Georgia, serif; font-size: 1.35rem; letter-spacing: 0.3px;
+}
+.nav-logo-icon { width:36px; height:36px; flex-shrink:0; }
+.nav-logo-text { display:flex; flex-direction:column; line-height:1; }
+.logo-main {
+  background: linear-gradient(135deg, #3a9494, #5aaed4);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  font-weight: 700; font-size: 1.18rem;
+}
+.logo-sub {
+  font-size: 0.6rem; font-family: 'Nunito', sans-serif; font-weight: 700;
+  color: var(--text-soft); letter-spacing: 1.8px; text-transform: uppercase; margin-top: 1px;
+}
+/* Desktop nav links */
+.nav-links { display:flex; gap:4px; flex-wrap:wrap; justify-content:center; flex:1; }
+.nav-btn {
+  background: none; border: none; padding: 8px 13px; border-radius: 20px; cursor: pointer;
+  font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 600;
+  color: var(--text-soft); transition: all 0.2s; letter-spacing: 0.3px; white-space: nowrap;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation; min-height: 40px;
+}
+.nav-btn:hover, .nav-btn.active { background: var(--rose); color: white; }
+.nav-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.privacy-badge {
+  font-size: 0.7rem; background: var(--sage); color: white;
+  padding: 5px 10px; border-radius: 12px; font-weight: 700;
+  letter-spacing: 0.5px; cursor: default; white-space: nowrap;
+}
+/* Hamburger button */
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  padding: 8px; border-radius: 12px; color: var(--text);
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  transition: background 0.2s; min-width: 44px; min-height: 44px;
+  align-items: center; justify-content: center;
+}
+.hamburger:hover { background: rgba(78,158,158,0.1); }
+.hamburger svg { display: block; }
+/* Mobile drawer */
+.mobile-menu {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200;
+}
+.mobile-menu.open { display: flex; }
+.menu-overlay {
+  position: absolute; inset: 0; background: rgba(20,50,50,0.45);
+  backdrop-filter: blur(3px);
+}
+.menu-drawer {
+  position: absolute; right: 0; top: 0; bottom: 0; width: min(320px, 88vw);
+  background: rgba(240,252,252,0.98); box-shadow: -8px 0 40px rgba(58,148,148,0.18);
+  display: flex; flex-direction: column; padding: 0; overflow-y: auto;
+  animation: slideIn 0.26s ease;
+}
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.menu-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px 14px; border-bottom: 1px solid rgba(78,158,158,0.12);
+}
+.menu-title { font-family: Georgia, serif; font-size: 1.05rem; color: var(--text); font-weight: 700; }
+.menu-close {
+  background: none; border: none; cursor: pointer; padding: 8px; border-radius: 10px;
+  color: var(--text-soft); font-size: 1.3rem; -webkit-tap-highlight-color: transparent;
+  min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s;
+}
+.menu-close:hover { background: rgba(78,158,158,0.1); }
+.menu-nav-list { display: flex; flex-direction: column; padding: 10px 12px; gap: 4px; flex: 1; }
+.menu-nav-btn {
+  background: none; border: none; text-align: left; padding: 14px 16px; border-radius: 16px;
+  cursor: pointer; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 600;
+  color: var(--text); transition: all 0.18s; display: flex; align-items: center; gap: 12px;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation; min-height: 52px; width: 100%;
+}
+.menu-nav-btn:hover, .menu-nav-btn.active {
+  background: linear-gradient(135deg, rgba(78,158,158,0.12), rgba(90,174,212,0.12));
+  color: var(--rose);
+}
+.menu-nav-btn .m-icon { font-size: 1.3rem; width: 28px; text-align: center; }
+/* Theme picker section in drawer */
+.menu-theme-section {
+  padding: 14px 20px 20px; border-top: 1px solid rgba(78,158,158,0.12);
+}
+.menu-theme-label {
+  font-size: 0.75rem; font-weight: 700; color: var(--text-soft);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; display: block;
+}
+.theme-swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+.theme-swatch {
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent;
+  transition: all 0.2s; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  position: relative;
+}
+.theme-swatch.active { border-color: var(--text); transform: scale(1.15); }
+.theme-swatch:hover { transform: scale(1.12); }
+
+/* ── THEME BUTTON (desktop) ── */
+.theme-btn {
+  background: none; border: 1.5px solid rgba(78,158,158,0.3); border-radius: 12px;
+  padding: 6px 10px; cursor: pointer; font-size: 1rem;
+  -webkit-tap-highlight-color: transparent; transition: all 0.2s; min-height: 36px;
+  display: flex; align-items: center; gap: 6px; color: var(--text-soft);
+  font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700;
+}
+.theme-btn:hover { background: rgba(78,158,158,0.08); border-color: var(--rose); }
+/* Theme picker popover (desktop) */
+.theme-popover {
+  position: absolute; top: calc(100% + 10px); right: 0;
+  background: rgba(245,252,252,0.98); border-radius: 18px; padding: 16px 18px;
+  box-shadow: 0 8px 32px rgba(58,148,148,0.22); border: 1px solid rgba(78,158,158,0.15);
+  display: none; z-index: 300; min-width: 200px;
+}
+.theme-popover.open { display: block; animation: fadeUp 0.2s ease; }
+.theme-popover-label {
+  font-size: 0.72rem; font-weight: 700; color: var(--text-soft);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; display: block;
+}
+.theme-popover-swatches { display: flex; gap: 9px; flex-wrap: wrap; }
+.nav-theme-wrap { position: relative; }
+
+/* ── MAIN ── */
+main { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:28px 18px 80px; }
+
+/* ── PAGES ── */
+.page { display:none; animation: fadeUp 0.4s ease; }
+.page.active { display:block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── CARD ── */
+.card {
+  background: var(--card-bg); border-radius: 22px; padding: 26px 24px;
+  box-shadow: var(--shadow); margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(8px);
+}
+.card-title {
+  font-family: Georgia, serif; font-size: 1.3rem; color: var(--text);
+  margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.icon { font-size: 1.35rem; }
+
+/* ── HOME ── */
+.hero { text-align:center; padding:36px 0 20px; }
+.hero h1 { font-family: Georgia, serif; font-size:2.5rem; color:var(--rose); line-height:1.2; }
+.hero h1 em { color:var(--peach); font-style:italic; }
+.hero p { font-size:1rem; color:var(--text-soft); margin:12px auto 0; line-height:1.75; max-width:520px; }
+.quick-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:13px; margin-top:26px; }
+.quick-card {
+  background: var(--card-bg); border-radius:18px; padding:20px 10px; text-align:center;
+  cursor:pointer; transition:all 0.22s; box-shadow:0 4px 18px rgba(70,140,140,0.08);
+  border:1px solid rgba(255,255,255,0.7);
+}
+.quick-card:hover { transform:translateY(-5px) scale(1.04); box-shadow:0 10px 28px rgba(70,140,140,0.16); }
+.q-icon { font-size:2rem; display:block; margin-bottom:8px; }
+.q-label { font-size:0.8rem; font-weight:700; color:var(--text-soft); letter-spacing:0.3px; }
+.affirmation-box {
+  background: linear-gradient(135deg, #3a9494, #5aaed4); color:white;
+  border-radius:18px; padding:26px 22px; text-align:center; margin-top:20px;
+}
+.affirmation-box p { font-family:Georgia,serif; font-size:1.15rem; font-style:italic; line-height:1.65; }
+.aff-credit { font-size:0.76rem; opacity:0.75; margin-top:10px; font-weight:600; letter-spacing:0.5px; }
+.aff-btn {
+  margin-top:14px; background:rgba(255,255,255,0.25); border:1.5px solid rgba(255,255,255,0.5);
+  color:white; padding:8px 22px; border-radius:20px; cursor:pointer;
+  font-size:0.85rem; font-weight:700; font-family:'Nunito',sans-serif; transition:all 0.2s;
+}
+.aff-btn:hover { background:rgba(255,255,255,0.4); }
+
+/* ── CRISIS BAR ── */
+.crisis-bar {
+  background: linear-gradient(135deg, #3a9494, #5aaed4); color:white;
+  border-radius:16px; padding:16px 20px;
+  display:flex; align-items:center; gap:14px; margin-bottom:22px; flex-wrap:wrap;
+}
+.crisis-icon { font-size:1.6rem; flex-shrink:0; }
+.crisis-text { flex:1; }
+.crisis-text strong { display:block; font-size:0.94rem; font-weight:700; }
+.crisis-text span { font-size:0.82rem; opacity:0.9; }
+.crisis-link {
+  background:rgba(255,255,255,0.25); color:white; text-decoration:none;
+  padding:9px 18px; border-radius:16px; font-weight:700; font-size:0.85rem;
+  border:1px solid rgba(255,255,255,0.4); transition:all 0.18s; white-space:nowrap; flex-shrink:0;
+}
+.crisis-link:hover { background:white; color:#3a9494; }
+
+/* ── MOOD ── */
+.mood-grid { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:16px 0; }
+.mood-btn {
+  background:none; border:2px solid transparent; border-radius:16px;
+  padding:12px 16px; cursor:pointer; font-size:1.75rem;
+  transition:all 0.18s; position:relative;
+}
+.mood-btn:hover { transform:scale(1.18); border-color:var(--peach); background:rgba(109,189,170,0.1); }
+.mood-btn.selected { border-color:var(--rose); background:rgba(78,158,158,0.12); transform:scale(1.18); }
+.mood-label { display:block; font-size:0.66rem; font-weight:700; color:var(--text-soft); margin-top:4px; text-align:center; }
+.mood-note {
+  width:100%; border:1.5px solid rgba(78,158,158,0.25); border-radius:14px;
+  padding:12px 15px; font-family:'Nunito',sans-serif; font-size:0.95rem;
+  color:var(--text); background:var(--warm-white); resize:vertical; min-height:80px;
+  outline:none; transition:border 0.2s;
+}
+.mood-note:focus { border-color:var(--rose); }
+.mood-log-item {
+  display:flex; align-items:center; gap:10px; padding:10px 0;
+  border-bottom:1px solid rgba(78,158,158,0.1); font-size:0.88rem; color:var(--text-soft);
+}
+.mood-log-item .emoji { font-size:1.4rem; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  background: linear-gradient(135deg, #3a9494, #5aaed4); color:white; border:none;
+  padding:12px 28px; border-radius:24px; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:0.93rem; font-weight:700;
+  transition:all 0.2s; box-shadow:0 4px 14px rgba(58,148,148,0.32); margin-top:14px;
+  display:inline-block;
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 7px 22px rgba(58,148,148,0.42); }
+.btn-outline {
+  background:none; border:1.5px solid var(--rose); color:var(--rose);
+  padding:9px 22px; border-radius:20px; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:700; transition:all 0.2s;
+}
+.btn-outline:hover { background:var(--rose); color:white; }
+.btn-danger {
+  background:none; border:1.5px solid #e07070; color:#c05050;
+  padding:10px 22px; border-radius:20px; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:700;
+  transition:all 0.2s; margin-top:10px;
+}
+.btn-danger:hover { background:#e07070; color:white; }
+
+/* ── BREATHING ── */
+.breath-container { display:flex; flex-direction:column; align-items:center; padding:20px 0; }
+.breath-circle-wrap { position:relative; width:200px; height:200px; margin:20px auto; cursor:pointer; }
+.breath-circle {
+  width:200px; height:200px; border-radius:50%;
+  background:radial-gradient(circle at 40% 40%, #6dbdaa, #3a9494);
+  display:flex; align-items:center; justify-content:center; transition:transform 0.1s;
+}
+.breath-circle.inhale { animation:breatheIn 4s ease-in-out forwards; }
+.breath-circle.hold   { animation:none; transform:scale(1.4); }
+.breath-circle.exhale { animation:breatheOut 6s ease-in-out forwards; }
+@keyframes breatheIn  { from { transform:scale(1);   } to { transform:scale(1.4); } }
+@keyframes breatheOut { from { transform:scale(1.4); } to { transform:scale(1);   } }
+.breath-text  { font-family:Georgia,serif; font-size:1.1rem; color:white; font-style:italic; text-align:center; }
+.breath-instr { font-size:1rem; color:var(--text-soft); text-align:center; margin-top:12px; font-weight:600; }
+.breath-counter { font-size:2.4rem; color:var(--rose); font-family:Georgia,serif; font-weight:700; margin-top:6px; }
+.breath-type-grid { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:16px; }
+.breath-type-btn {
+  background:var(--card-bg); border:1.5px solid rgba(78,158,158,0.2); border-radius:14px;
+  padding:9px 16px; cursor:pointer; font-family:'Nunito',sans-serif;
+  font-size:0.84rem; font-weight:700; color:var(--text-soft); transition:all 0.18s;
+}
+.breath-type-btn.active, .breath-type-btn:hover { background:var(--rose); color:white; border-color:var(--rose); }
+
+/* ── JOURNAL ── */
+.journal-entry {
+  width:100%; border:1.5px solid rgba(78,158,158,0.2); border-radius:16px;
+  padding:15px 17px; font-family:'Nunito',sans-serif; font-size:1rem;
+  color:var(--text); background:var(--warm-white); resize:vertical;
+  min-height:160px; outline:none; transition:border 0.2s; line-height:1.7;
+}
+.journal-entry:focus { border-color:var(--rose); }
+.journal-prompts { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+.prompt-chip {
+  background:rgba(78,158,158,0.1); border:1px solid rgba(78,158,158,0.2);
+  border-radius:12px; padding:6px 14px; font-size:0.8rem; font-weight:600;
+  color:var(--rose); cursor:pointer; transition:all 0.16s;
+}
+.prompt-chip:hover { background:var(--rose); color:white; }
+.journal-item {
+  background:rgba(109,189,170,0.08); border-radius:14px;
+  padding:14px 16px; margin-bottom:10px; border-left:3px solid var(--peach);
+}
+.journal-item .jdate { font-size:0.74rem; color:var(--text-soft); font-weight:700; margin-bottom:5px; }
+.journal-item .jcontent { font-size:0.9rem; color:var(--text); line-height:1.65; }
+.privacy-note {
+  display:flex; align-items:center; gap:8px; background:rgba(90,171,158,0.12);
+  border-radius:12px; padding:10px 14px; font-size:0.82rem;
+  color:var(--sage); font-weight:700; margin-bottom:14px;
+}
+
+/* ── GROUNDING ── */
+.ground-step {
+  display:flex; align-items:flex-start; gap:16px; padding:15px;
+  background:rgba(255,255,255,0.6); border-radius:16px; margin-bottom:11px;
+  transition:all 0.2s; cursor:pointer; border:1.5px solid transparent;
+}
+.ground-step:hover { border-color:var(--lavender); background:rgba(138,174,212,0.08); }
+.ground-step.done { background:rgba(90,171,158,0.12); border-color:var(--sage); }
+.ground-num {
+  width:40px; height:40px; border-radius:50%;
+  background:linear-gradient(135deg, var(--lavender), var(--sky));
+  color:white; display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:1.1rem; flex-shrink:0;
+}
+.ground-step.done .ground-num { background:linear-gradient(135deg, var(--sage), #6ab89a); }
+.ground-body h4 { font-size:0.93rem; font-weight:700; color:var(--text); margin-bottom:3px; }
+.ground-body p  { font-size:0.83rem; color:var(--text-soft); line-height:1.5; }
+
+/* ── SLEEP ── */
+.sleep-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+.sleep-field label { display:block; font-size:0.8rem; font-weight:700; color:var(--text-soft); margin-bottom:6px; }
+.sleep-field input, .sleep-field select {
+  width:100%; border:1.5px solid rgba(106,175,212,0.3); border-radius:12px;
+  padding:10px 14px; font-family:'Nunito',sans-serif; font-size:0.93rem;
+  color:var(--text); background:var(--warm-white); outline:none; transition:border 0.2s;
+}
+.sleep-field input:focus, .sleep-field select:focus { border-color:var(--sky); }
+.sleep-quality { display:flex; gap:10px; flex-wrap:wrap; margin:12px 0; }
+.sq-btn {
+  background:none; border:2px solid rgba(106,175,212,0.28); border-radius:14px;
+  padding:10px 15px; cursor:pointer; font-size:1.3rem; transition:all 0.18s;
+}
+.sq-btn:hover, .sq-btn.selected { border-color:var(--sky); background:rgba(106,175,212,0.14); transform:scale(1.1); }
+.sleep-log-item {
+  display:flex; align-items:center; gap:14px; padding:12px 0;
+  border-bottom:1px solid rgba(106,175,212,0.14);
+}
+.sleep-emoji { font-size:1.4rem; }
+.sleep-detail { font-size:0.87rem; color:var(--text-soft); flex:1; }
+.sleep-hours  { font-size:1rem; font-weight:700; color:var(--sky); }
+
+/* ── STORIES ── */
+.story-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+.story-tab {
+  background:var(--card-bg); border:1.5px solid rgba(78,158,158,0.15);
+  border-radius:14px; padding:8px 16px; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:0.82rem; font-weight:700;
+  color:var(--text-soft); transition:all 0.18s;
+}
+.story-tab.active, .story-tab:hover {
+  background:linear-gradient(135deg, var(--lavender), var(--sky));
+  color:white; border-color:transparent;
+}
+.story-card {
+  background:linear-gradient(135deg, rgba(138,174,212,0.12), rgba(106,175,212,0.12));
+  border-radius:18px; padding:24px; border:1px solid rgba(138,174,212,0.28);
+}
+.story-card h3 { font-family:Georgia,serif; font-size:1.18rem; color:var(--text); margin-bottom:4px; }
+.story-meta { font-size:0.74rem; color:var(--text-soft); font-weight:700; margin-bottom:14px; letter-spacing:0.4px; }
+.story-body { font-size:0.92rem; color:var(--text-soft); line-height:1.85; }
+.story-nav { display:flex; gap:10px; margin-top:16px; }
+
+/* ── PRIVACY PAGE ── */
+.privacy-section {
+  background:rgba(90,171,158,0.09); border-radius:16px;
+  padding:18px 20px; border-left:4px solid var(--sage); margin-bottom:14px;
+}
+.privacy-section h4 { font-size:0.93rem; font-weight:700; color:var(--sage); margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+.privacy-section p { font-size:0.87rem; color:var(--text-soft); line-height:1.7; }
+
+/* ── DOWNLOAD PROGRESS CARD ── */
+.download-card {
+  background:linear-gradient(135deg, rgba(58,148,148,0.08), rgba(90,174,212,0.08));
+  border:1.5px solid rgba(58,148,148,0.18); border-radius:18px; padding:22px 22px;
+  margin-bottom:14px;
+}
+.download-card h4 { font-family:Georgia,serif; font-size:1.05rem; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.download-card p { font-size:0.86rem; color:var(--text-soft); line-height:1.7; margin-bottom:14px; }
+.download-options { display:flex; gap:10px; flex-wrap:wrap; }
+.btn-download {
+  background:linear-gradient(135deg, #3a9494, #5aaed4); color:white; border:none;
+  padding:11px 22px; border-radius:20px; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:700;
+  transition:all 0.2s; box-shadow:0 4px 12px rgba(58,148,148,0.28);
+}
+.btn-download:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(58,148,148,0.4); }
+.btn-download-json {
+  background:none; border:1.5px solid var(--sage); color:var(--sage);
+  padding:11px 22px; border-radius:20px; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:700; transition:all 0.2s;
+}
+.btn-download-json:hover { background:var(--sage); color:white; }
+.stats-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.stat-pill {
+  background:rgba(255,255,255,0.75); border-radius:12px; padding:9px 16px;
+  font-size:0.82rem; font-weight:700; color:var(--text-soft);
+  border:1px solid rgba(78,158,158,0.15); display:flex; align-items:center; gap:6px;
+}
+.stat-pill strong { color:var(--rose); font-size:1rem; }
+
+/* ── TOUCH-FRIENDLY GLOBAL ── */
+button, [onclick] { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.quick-card, .mood-btn, .sq-btn, .ground-step, .prompt-chip, .story-tab, .breath-type-btn {
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.mood-btn { min-width: 56px; min-height: 56px; }
+.sq-btn   { min-width: 52px; min-height: 52px; }
+
+/* ── RESPONSIVE / MOBILE ── */
+@media(max-width: 700px) {
+  .nav-links, .nav-theme-wrap { display: none !important; }
+  .hamburger { display: flex !important; }
+  .privacy-badge { font-size: 0.65rem; padding: 4px 8px; }
+}
+@media(min-width: 701px) {
+  .hamburger, .mobile-menu { display: none !important; }
+}
+@media(max-width: 580px) {
+  .hero h1 { font-size:1.75rem; }
+  .sleep-grid { grid-template-columns:1fr; }
+  main { padding:16px 12px 80px; }
+  .card { padding: 20px 16px; }
+  .quick-grid { gap: 10px; }
+  .quick-card { padding: 16px 8px; }
+  .breath-circle-wrap, .breath-circle { width: 170px; height: 170px; }
+}
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3a9494"/>
+          <stop offset="100%" stop-color="#5aaed4"/>
+        </linearGradient>
+      </defs>
+      <!-- left footstep (faded) -->
+      <ellipse cx="11" cy="22" rx="4.5" ry="7.5" fill="url(#lg1)" opacity="0.35" transform="rotate(-12 11 22)"/>
+      <ellipse cx="9"  cy="15.5" rx="1.6" ry="2.2" fill="url(#lg1)" opacity="0.35" transform="rotate(-12 9 15.5)"/>
+      <ellipse cx="12" cy="14.2" rx="1.6" ry="2.2" fill="url(#lg1)" opacity="0.35" transform="rotate(-12 12 14.2)"/>
+      <ellipse cx="15" cy="14.6" rx="1.5" ry="2"   fill="url(#lg1)" opacity="0.35" transform="rotate(-12 15 14.6)"/>
+      <!-- right footstep -->
+      <ellipse cx="23" cy="15" rx="4.5" ry="7.5" fill="url(#lg1)" opacity="0.80" transform="rotate(12 23 15)"/>
+      <ellipse cx="21" cy="7.8" rx="1.6" ry="2.2" fill="url(#lg1)" opacity="0.80" transform="rotate(12 21 7.8)"/>
+      <ellipse cx="24" cy="7"   rx="1.6" ry="2.2" fill="url(#lg1)" opacity="0.80" transform="rotate(12 24 7)"/>
+      <ellipse cx="27" cy="7.8" rx="1.5" ry="2"   fill="url(#lg1)" opacity="0.80" transform="rotate(12 27 7.8)"/>
+      <path d="M4 30 Q18 27 32 30" stroke="url(#lg1)" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="logo-main">Gentle Steps</span>
+      <span class="logo-sub">your safe space</span>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('home',this)">🏠 Home</button>
+    <button class="nav-btn" onclick="showPage('mood',this)">🌈 Mood</button>
+    <button class="nav-btn" onclick="showPage('breath',this)">🌬️ Breathe</button>
+    <button class="nav-btn" onclick="showPage('journal',this)">📖 Journal</button>
+    <button class="nav-btn" onclick="showPage('ground',this)">🌿 Ground</button>
+    <button class="nav-btn" onclick="showPage('sleep',this)">🌙 Sleep</button>
+    <button class="nav-btn" onclick="showPage('stories',this)">✨ Stories</button>
+    <button class="nav-btn" onclick="showPage('privacy',this)">🔒 Privacy</button>
+  </div>
+
+  <div class="nav-right">
+    <!-- Desktop theme picker -->
+    <div class="nav-theme-wrap">
+      <button class="theme-btn" onclick="toggleThemePopover(event)" title="Change theme">🎨 Theme</button>
+      <div class="theme-popover" id="theme-popover">
+        <span class="theme-popover-label">Choose a theme</span>
+        <div class="theme-popover-swatches" id="desktop-swatches"></div>
+      </div>
+    </div>
+    <span class="privacy-badge" id="connection-badge">🔒 Private &amp; Offline</span>
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburger-btn" onclick="openMobileMenu()" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════ MOBILE DRAWER ═══════════ -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="menu-overlay" onclick="closeMobileMenu()"></div>
+  <div class="menu-drawer">
+    <div class="menu-header">
+      <span class="menu-title">🌿 Gentle Steps</span>
+      <button class="menu-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+    </div>
+    <div class="menu-nav-list">
+      <button class="menu-nav-btn active" onclick="mobileNav('home')"><span class="m-icon">🏠</span> Home</button>
+      <button class="menu-nav-btn" onclick="mobileNav('mood')"><span class="m-icon">🌈</span> Mood Check</button>
+      <button class="menu-nav-btn" onclick="mobileNav('breath')"><span class="m-icon">🌬️</span> Breathe</button>
+      <button class="menu-nav-btn" onclick="mobileNav('journal')"><span class="m-icon">📖</span> Journal</button>
+      <button class="menu-nav-btn" onclick="mobileNav('ground')"><span class="m-icon">🌿</span> Grounding</button>
+      <button class="menu-nav-btn" onclick="mobileNav('sleep')"><span class="m-icon">🌙</span> Sleep Log</button>
+      <button class="menu-nav-btn" onclick="mobileNav('stories')"><span class="m-icon">✨</span> Stories</button>
+      <button class="menu-nav-btn" onclick="mobileNav('privacy')"><span class="m-icon">🔒</span> Privacy</button>
+    </div>
+    <div class="menu-theme-section">
+      <span class="menu-theme-label">🎨 Choose a theme</span>
+      <div class="theme-swatches" id="mobile-swatches"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main>
+
+<!-- ── HOME ── -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <h1>You are <em>not</em> alone. 💛</h1>
+    <p>Gentle Steps is your calm, private space to breathe, feel, and heal — one small step at a time. Everything stays on your device. Always.</p>
+  </div>
+
+  <div class="crisis-bar">
+    <div class="crisis-icon">💙</div>
+    <div class="crisis-text">
+      <strong>Feeling overwhelmed right now?</strong>
+      <span>Try the breathing or grounding exercises — they work in minutes.</span>
+    </div>
+    <a class="crisis-link" onclick="showPage('breath',null)">Breathe Now →</a>
+  </div>
+
+  <div class="quick-grid">
+    <div class="quick-card" onclick="showPage('mood',null)">   <span class="q-icon">🌈</span><span class="q-label">Mood Check</span></div>
+    <div class="quick-card" onclick="showPage('breath',null)"> <span class="q-icon">🌬️</span><span class="q-label">Breathe</span></div>
+    <div class="quick-card" onclick="showPage('journal',null)"><span class="q-icon">📖</span><span class="q-label">Journal</span></div>
+    <div class="quick-card" onclick="showPage('ground',null)"> <span class="q-icon">🌿</span><span class="q-label">Grounding</span></div>
+    <div class="quick-card" onclick="showPage('sleep',null)">  <span class="q-icon">🌙</span><span class="q-label">Sleep Log</span></div>
+    <div class="quick-card" onclick="showPage('stories',null)"><span class="q-icon">✨</span><span class="q-label">Stories</span></div>
+  </div>
+
+  <div class="affirmation-box">
+    <p id="aff-text">"You have survived every difficult day so far. You will survive this one too."</p>
+    <div class="aff-credit">✦ Your Daily Affirmation</div>
+    <button class="aff-btn" onclick="nextAffirmation()">New Affirmation 🌸</button>
+  </div>
+</div>
+
+<!-- ── MOOD ── -->
+<div class="page" id="page-mood">
+  <div class="card">
+    <div class="card-title"><span class="icon">🌈</span> How are you feeling today?</div>
+    <div class="mood-grid">
+      <button class="mood-btn" onclick="selectMood(this,'😊','Happy')">   😊<span class="mood-label">Happy</span></button>
+      <button class="mood-btn" onclick="selectMood(this,'😌','Calm')">    😌<span class="mood-label">Calm</span></button>
+      <button class="mood-btn" onclick="selectMood(this,'😔','Sad')">     😔<span class="mood-label">Sad</span></button>
+      <button class="mood-btn" onclick="selectMood(this,'😰','Anxious')"> 😰<span class="mood-label">Anxious</span></button>
+      <button class="mood-btn" onclick="selectMood(this,'😤','Frustrated')">😤<span class="mood-label">Frustrated</span></button>
+      <button class="mood-btn" onclick="selectMood(this,'😴','Tired')">   😴<span class="mood-label">Tired</span></button>
+      <button class="mood-btn" onclick="selectMood(this,'🥰','Grateful')">🥰<span class="mood-label">Grateful</span></button>
+      <button class="mood-btn" onclick="selectMood(this,'😶','Numb')">    😶<span class="mood-label">Numb</span></button>
+    </div>
+    <textarea class="mood-note" id="mood-note" placeholder="Want to say a little more about today? (optional — totally private)"></textarea>
+    <button class="btn-primary" onclick="saveMood()">Save Today's Mood 💛</button>
+  </div>
+  <div class="card" id="mood-log">
+    <div class="card-title"><span class="icon">📅</span> Recent Moods</div>
+    <div id="mood-log-list"><p style="font-size:0.88rem;color:var(--text-soft)">Your mood log will appear here. 🌸</p></div>
+  </div>
+</div>
+
+<!-- ── BREATHE ── -->
+<div class="page" id="page-breath">
+  <div class="card">
+    <div class="card-title"><span class="icon">🌬️</span> Breathing Exercises</div>
+    <div class="breath-type-grid">
+      <button class="breath-type-btn active" onclick="setBreathType(this,'4-7-8')">4-7-8 Calm</button>
+      <button class="breath-type-btn" onclick="setBreathType(this,'box')">Box Breathing</button>
+      <button class="breath-type-btn" onclick="setBreathType(this,'478deep')">Deep Belly</button>
+    </div>
+    <div class="breath-container">
+      <p style="font-size:0.87rem;color:var(--text-soft);text-align:center;margin-bottom:12px" id="breath-desc">Inhale 4s · Hold 7s · Exhale 8s — great for calming anxiety fast.</p>
+      <div class="breath-circle-wrap" onclick="startBreathing()">
+        <div class="breath-circle" id="breath-circle">
+          <div class="breath-text" id="breath-inner-text">Tap to<br>begin</div>
+        </div>
+      </div>
+      <div class="breath-instr" id="breath-instr">Tap the circle to start</div>
+      <div class="breath-counter" id="breath-counter"></div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--text-soft);text-align:center;margin-top:8px">💡 Even 3 cycles can significantly reduce anxiety</p>
+  </div>
+</div>
+
+<!-- ── JOURNAL ── -->
+<div class="page" id="page-journal">
+  <div class="card">
+    <div class="card-title"><span class="icon">📖</span> Your Private Journal</div>
+    <div class="privacy-note">🔒 Your words never leave this device — saved only in your browser.</div>
+    <p style="font-size:0.85rem;color:var(--text-soft);margin-bottom:10px">Need a little push? Pick a prompt:</p>
+    <div class="journal-prompts">
+      <span class="prompt-chip" onclick="setPrompt('Today I feel...')">Today I feel...</span>
+      <span class="prompt-chip" onclick="setPrompt('Something I am grateful for is...')">Gratitude</span>
+      <span class="prompt-chip" onclick="setPrompt('A thought I want to release today is...')">Release a thought</span>
+      <span class="prompt-chip" onclick="setPrompt('One kind thing I will do for myself today is...')">Self-kindness</span>
+      <span class="prompt-chip" onclick="setPrompt('What is weighing on my heart right now...')">What's on my heart</span>
+    </div>
+    <textarea class="journal-entry" id="journal-text" placeholder="Write freely here. There is no right or wrong..."></textarea>
+    <button class="btn-primary" onclick="saveJournal()">Save Entry 💛</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="icon">🗂️</span> Past Entries</div>
+    <div id="journal-list"><p style="font-size:0.88rem;color:var(--text-soft)">Your saved entries will appear here. 🌸</p></div>
+  </div>
+</div>
+
+<!-- ── GROUNDING ── -->
+<div class="page" id="page-ground">
+  <div class="card">
+    <div class="card-title"><span class="icon">🌿</span> 5-4-3-2-1 Grounding</div>
+    <p style="font-size:0.87rem;color:var(--text-soft);margin-bottom:18px;line-height:1.65">When anxiety or panic rises, this technique gently brings you back to the present moment. Tap each step as you complete it. 💙</p>
+    <div class="ground-step" onclick="toggleGround(this,0)" id="gs0">
+      <div class="ground-num">5</div>
+      <div class="ground-body"><h4>5 things you can SEE 👁️</h4><p>Look around slowly. Name 5 things you can see right now — a colour, an object, a pattern on the wall.</p></div>
+    </div>
+    <div class="ground-step" onclick="toggleGround(this,1)" id="gs1">
+      <div class="ground-num">4</div>
+      <div class="ground-body"><h4>4 things you can TOUCH 🤚</h4><p>Feel the texture of 4 things around you — your clothes, a surface, the air, your own skin.</p></div>
+    </div>
+    <div class="ground-step" onclick="toggleGround(this,2)" id="gs2">
+      <div class="ground-num">3</div>
+      <div class="ground-body"><h4>3 things you can HEAR 👂</h4><p>Close your eyes and listen. Name 3 sounds — near or far, loud or very faint.</p></div>
+    </div>
+    <div class="ground-step" onclick="toggleGround(this,3)" id="gs3">
+      <div class="ground-num">2</div>
+      <div class="ground-body"><h4>2 things you can SMELL 👃</h4><p>Take a slow breath. What do you smell? Your skin, the air, nearby food or drink.</p></div>
+    </div>
+    <div class="ground-step" onclick="toggleGround(this,4)" id="gs4">
+      <div class="ground-num">1</div>
+      <div class="ground-body"><h4>1 thing you can TASTE 👅</h4><p>Notice what you can taste right now — even the faintest taste or just the sensation of your mouth.</p></div>
+    </div>
+    <div id="ground-complete" style="display:none;text-align:center;padding:18px 0;">
+      <p style="font-family:Georgia,serif;font-size:1.08rem;color:var(--sage)">🌿 Beautiful. You've returned to the present. Take a deep breath. You are safe. 💚</p>
+      <button class="btn-primary" style="margin-top:14px" onclick="resetGround()">Reset Exercise</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SLEEP ── -->
+<div class="page" id="page-sleep">
+  <div class="card">
+    <div class="card-title"><span class="icon">🌙</span> Sleep Tracker</div>
+    <p style="font-size:0.87rem;color:var(--text-soft);margin-bottom:16px;line-height:1.65">Good sleep is one of the most powerful things you can do for your mental health. Track your rest here. 💤</p>
+    <div class="sleep-grid">
+      <div class="sleep-field"><label>Bedtime 🌙</label><input type="time" id="sleep-bed" value="22:00"/></div>
+      <div class="sleep-field"><label>Wake time ☀️</label><input type="time" id="sleep-wake" value="06:00"/></div>
+    </div>
+    <p style="font-size:0.84rem;font-weight:700;color:var(--text-soft);margin-bottom:10px">How was your sleep quality?</p>
+    <div class="sleep-quality">
+      <button class="sq-btn" onclick="selectSQ(this,'😴 Deep & restful')">😴</button>
+      <button class="sq-btn" onclick="selectSQ(this,'🌙 Okay sleep')">🌙</button>
+      <button class="sq-btn" onclick="selectSQ(this,'😕 Restless night')">😕</button>
+      <button class="sq-btn" onclick="selectSQ(this,'😰 Nightmare / anxiety')">😰</button>
+      <button class="sq-btn" onclick="selectSQ(this,'🥱 Couldn\'t sleep')">🥱</button>
+    </div>
+    <textarea class="mood-note" id="sleep-note" placeholder="Any notes about your sleep? Dreams, thoughts that kept you up... (private)" style="margin-top:12px;min-height:60px"></textarea>
+    <button class="btn-primary" onclick="saveSleep()">Log Sleep 🌙</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="icon">📊</span> Sleep Log</div>
+    <div id="sleep-log-list"><p style="font-size:0.88rem;color:var(--text-soft)">Your sleep log will appear here. 🌙</p></div>
+  </div>
+</div>
+
+<!-- ── STORIES ── -->
+<div class="page" id="page-stories">
+  <div class="card">
+    <div class="card-title"><span class="icon">✨</span> Stories &amp; Reflections</div>
+    <p style="font-size:0.87rem;color:var(--text-soft);margin-bottom:16px;line-height:1.65">Short stories to occupy your mind, lift your spirit, and remind you of your strength. 🌸</p>
+    <div class="story-tabs">
+      <button class="story-tab active" onclick="setStoryCategory(this,'hope')">💛 Hope</button>
+      <button class="story-tab" onclick="setStoryCategory(this,'calm')">🌿 Calm</button>
+      <button class="story-tab" onclick="setStoryCategory(this,'strength')">🔥 Strength</button>
+      <button class="story-tab" onclick="setStoryCategory(this,'mindful')">🧘 Mindful</button>
+    </div>
+    <div class="story-card">
+      <h3 id="story-title">The Sunrise She Almost Missed</h3>
+      <div class="story-meta" id="story-meta">✦ 2 min read · Hope</div>
+      <div class="story-body" id="story-body"></div>
+    </div>
+    <div class="story-nav">
+      <button class="btn-outline" onclick="prevStory()">← Previous</button>
+      <button class="btn-primary" onclick="nextStory()">Next Story →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRIVACY ── -->
+<div class="page" id="page-privacy">
+  <div class="card">
+    <div class="card-title"><span class="icon">🔒</span> Your Privacy Promise</div>
+    <p style="font-size:0.9rem;color:var(--text-soft);margin-bottom:20px;line-height:1.72">At Gentle Steps, your privacy is not just a policy — it is a promise. Here is exactly how we protect you.</p>
+
+    <div class="privacy-section">
+      <h4>🖥️ Everything Stays On Your Device</h4>
+      <p>Your journal entries, mood logs, sleep data — all of it is stored only in your browser's local storage. Nothing is ever sent to any server. No account needed. No cloud. No data collection.</p>
+    </div>
+    <div class="privacy-section">
+      <h4>👁️ Nobody Can See Your Data</h4>
+      <p>We have no backend, no database, no analytics. Absolutely zero visibility into what you write or how you feel. Your words are yours alone.</p>
+    </div>
+    <div class="privacy-section">
+      <h4>🚫 No Ads. No Tracking. No Selling.</h4>
+      <p>Gentle Steps contains no advertisements, no trackers, and no third-party cookies. Your vulnerability will never be used to sell you something.</p>
+    </div>
+
+    <!-- ── DOWNLOAD YOUR PROGRESS ── -->
+    <div class="download-card">
+      <h4>⬇️ Download Your Progress</h4>
+      <p>Your data is yours. Download a copy of all your moods, journal entries, and sleep logs to keep forever — even if you clear your browser or switch devices. Your file never leaves your device.</p>
+      <div id="data-stats" class="stats-row" style="margin-bottom:14px"></div>
+      <div class="download-options">
+        <button class="btn-download" onclick="downloadData('txt')">📄 Download as Text (.txt)</button>
+        <button class="btn-download-json" onclick="downloadData('json')">{ } Download as JSON</button>
+      </div>
+    </div>
+
+    <div class="privacy-section">
+      <h4>🗑️ You Control Your Data</h4>
+      <p>You can delete everything at any time. Your data, your decision — always.</p>
+      <button class="btn-danger" onclick="clearAllData()">🗑️ Clear All My Data</button>
+    </div>
+    <div class="privacy-section">
+      <h4>💙 A Note From Hadijah</h4>
+      <p>"I built Gentle Steps because I've been in that dark place too. I know how important it is to have somewhere safe to land. This app is my way of holding space for you — without judgment, without watching, without selling. You are safe here."</p>
+    </div>
+  </div>
+</div>
+
+</main><!-- end main -->
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+'use strict';
+
+// ── DATA ──
+let moodLog    = JSON.parse(localStorage.getItem('s_mood')    || '[]');
+let journalLog = JSON.parse(localStorage.getItem('s_journal') || '[]');
+let sleepLog   = JSON.parse(localStorage.getItem('s_sleep')   || '[]');
+let selectedMood = null, selectedSQ = null;
+
+// ── NAVIGATION ──
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'"))
+        b.classList.add('active');
+    });
+  }
+  if (id === 'mood')    renderMoodLog();
+  if (id === 'journal') renderJournal();
+  if (id === 'sleep')   renderSleep();
+  if (id === 'privacy') renderDataStats();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── AFFIRMATIONS ──
+const affirmations = [
+  "You have survived every difficult day so far. You will survive this one too.",
+  "Your feelings are valid, and you deserve gentleness from yourself.",
+  "Healing is not linear. Every small step counts — including today.",
+  "You are worthy of love and peace, exactly as you are right now.",
+  "It is okay to rest. Rest is not giving up — it is how you gather strength.",
+  "You are not your anxiety. You are the sky; anxiety is just passing weather.",
+  "Even the smallest act of self-care is a radical act of love.",
+  "You are braver than you believe, and stronger than you feel.",
+  "This moment is hard, but this moment will also pass. Hold on.",
+  "Your story is not over. The best chapters may still be ahead.",
+  "You deserve the same compassion you would give to someone you love.",
+  "Progress, not perfection. You are doing enough. You are enough."
+];
+let affIdx = Math.floor(Math.random() * affirmations.length);
+function nextAffirmation() {
+  affIdx = (affIdx + 1) % affirmations.length;
+  document.getElementById('aff-text').textContent = '"' + affirmations[affIdx] + '"';
+}
+
+// ── MOOD ──
+function selectMood(btn, emoji, label) {
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedMood = { emoji, label };
+}
+function saveMood() {
+  if (!selectedMood) { alert('Please select how you are feeling first 🌸'); return; }
+  const note = document.getElementById('mood-note').value.trim();
+  moodLog.unshift({
+    emoji: selectedMood.emoji, label: selectedMood.label, note,
+    date: new Date().toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' }),
+    time: new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })
+  });
+  if (moodLog.length > 30) moodLog.pop();
+  localStorage.setItem('s_mood', JSON.stringify(moodLog));
+  document.getElementById('mood-note').value = '';
+  selectedMood = null;
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+  renderMoodLog();
+  alert('Mood saved 💛 Thank you for checking in with yourself.');
+}
+function renderMoodLog() {
+  const el = document.getElementById('mood-log-list');
+  if (!moodLog.length) {
+    el.innerHTML = '<p style="font-size:0.88rem;color:var(--text-soft)">Your mood log will appear here. 🌸</p>';
+    return;
+  }
+  el.innerHTML = moodLog.slice(0, 10).map(m =>
+    `<div class="mood-log-item">
+       <span class="emoji">${m.emoji}</span>
+       <div>
+         <strong style="font-size:0.88rem">${m.label}</strong><br>
+         <span style="font-size:0.76rem">${m.date} · ${m.time}${m.note ? '<br><em>' + m.note + '</em>' : ''}</span>
+       </div>
+     </div>`
+  ).join('');
+}
+
+// ── BREATHING AUDIO CUES (Web Audio API — no files needed) ──
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Resume in case browser suspended it
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+/**
+ * Play a soft, calming tone.
+ * @param {number} freq      - Hz (pitch)
+ * @param {number} duration  - seconds
+ * @param {'sine'|'triangle'} wave
+ * @param {number} volume    - 0–1
+ */
+function playTone(freq, duration, wave = 'sine', volume = 0.18) {
+  try {
+    const ctx  = getAudioCtx();
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type      = wave;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    // Smooth fade-in and fade-out to avoid clicks
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.12);
+    gain.gain.setValueAtTime(volume, ctx.currentTime + duration - 0.18);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + duration);
+  } catch(e) { /* Audio not supported — fail silently */ }
+}
+
+/**
+ * Distinct, gentle tones for each breath phase:
+ *  Inhale  → rising soft chime  (B4 = 494 Hz)
+ *  Hold    → steady mid hum     (G4 = 392 Hz)
+ *  Exhale  → descending calm    (E4 = 330 Hz)
+ */
+function breathSound(phaseLabel) {
+  if (phaseLabel === 'Breathe In')  playTone(494, 0.6, 'sine',     0.15);
+  if (phaseLabel === 'Hold')        playTone(392, 0.4, 'triangle', 0.10);
+  if (phaseLabel === 'Breathe Out') playTone(330, 0.7, 'sine',     0.13);
+}
+
+// ── BREATHING ──
+let breathRunning = false, breathInterval = null, breathTimeout = null;
+const breathTypes = {
+  '4-7-8':   { phases: [{t:'Breathe In',d:4},{t:'Hold',d:7},{t:'Breathe Out',d:8}],   desc:'Inhale 4s · Hold 7s · Exhale 8s — great for calming anxiety fast.' },
+  'box':     { phases: [{t:'Breathe In',d:4},{t:'Hold',d:4},{t:'Breathe Out',d:4},{t:'Hold',d:4}], desc:'Equal 4s phases — box breathing for stress & focus.' },
+  '478deep': { phases: [{t:'Breathe In',d:5},{t:'Hold',d:2},{t:'Breathe Out',d:6}],   desc:'Deep belly breathing — slow and restorative.' }
+};
+let currentBreathType = '4-7-8';
+function setBreathType(btn, type) {
+  document.querySelectorAll('.breath-type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBreathType = type;
+  document.getElementById('breath-desc').textContent = breathTypes[type].desc;
+  stopBreathing();
+  document.getElementById('breath-inner-text').innerHTML = 'Tap to<br>begin';
+  document.getElementById('breath-instr').textContent = 'Tap the circle to start';
+  document.getElementById('breath-counter').textContent = '';
+}
+function startBreathing() {
+  if (breathRunning) { stopBreathing(); return; }
+  breathRunning = true;
+  runBreathPhase(0, 0);
+}
+function stopBreathing() {
+  breathRunning = false;
+  clearInterval(breathInterval);
+  clearTimeout(breathTimeout);
+  const c = document.getElementById('breath-circle');
+  c.className = 'breath-circle';
+  document.getElementById('breath-inner-text').innerHTML = 'Tap to<br>begin';
+  document.getElementById('breath-instr').textContent = 'Tap the circle to start';
+  document.getElementById('breath-counter').textContent = '';
+}
+function runBreathPhase(phaseIdx, cycle) {
+  if (!breathRunning) return;
+  const phases = breathTypes[currentBreathType].phases;
+  const phase = phases[phaseIdx];
+  const c = document.getElementById('breath-circle');
+  c.className = 'breath-circle';
+  if (phase.t === 'Breathe In') c.classList.add('inhale');
+  else if (phase.t === 'Breathe Out') c.classList.add('exhale');
+  else c.classList.add('hold');
+  breathSound(phase.t);
+  document.getElementById('breath-inner-text').innerHTML = phase.t;
+  document.getElementById('breath-instr').textContent = phase.t + '...';
+  let count = phase.d;
+  document.getElementById('breath-counter').textContent = count;
+  clearInterval(breathInterval);
+  breathInterval = setInterval(() => {
+    count--;
+    document.getElementById('breath-counter').textContent = count;
+    if (count <= 0) clearInterval(breathInterval);
+  }, 1000);
+  breathTimeout = setTimeout(() => {
+    const nextPhase = (phaseIdx + 1) % phases.length;
+    const nextCycle = nextPhase === 0 ? cycle + 1 : cycle;
+    runBreathPhase(nextPhase, nextCycle);
+  }, phase.d * 1000);
+}
+
+// ── JOURNAL ──
+function setPrompt(p) {
+  document.getElementById('journal-text').value = p + ' ';
+  document.getElementById('journal-text').focus();
+}
+function saveJournal() {
+  const text = document.getElementById('journal-text').value.trim();
+  if (!text) { alert('Write something first — even just a few words. 🌸'); return; }
+  journalLog.unshift({
+    text,
+    date: new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' }),
+    time: new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' })
+  });
+  if (journalLog.length > 50) journalLog.pop();
+  localStorage.setItem('s_journal', JSON.stringify(journalLog));
+  document.getElementById('journal-text').value = '';
+  renderJournal();
+  alert('Entry saved 💛 Your words are safe here.');
+}
+function renderJournal() {
+  const el = document.getElementById('journal-list');
+  if (!journalLog.length) {
+    el.innerHTML = '<p style="font-size:0.88rem;color:var(--text-soft)">Your saved entries will appear here. 🌸</p>';
+    return;
+  }
+  el.innerHTML = journalLog.map(j =>
+    `<div class="journal-item">
+       <div class="jdate">📅 ${j.date} · ${j.time}</div>
+       <div class="jcontent">${j.text.replace(/\n/g, '<br>')}</div>
+     </div>`
+  ).join('');
+}
+
+// ── GROUNDING ──
+let groundDone = [false, false, false, false, false];
+function toggleGround(el, idx) {
+  groundDone[idx] = !groundDone[idx];
+  el.classList.toggle('done', groundDone[idx]);
+  if (groundDone.every(Boolean))
+    document.getElementById('ground-complete').style.display = 'block';
+}
+function resetGround() {
+  groundDone = [false, false, false, false, false];
+  for (let i = 0; i < 5; i++) document.getElementById('gs' + i).classList.remove('done');
+  document.getElementById('ground-complete').style.display = 'none';
+}
+
+// ── SLEEP ──
+function selectSQ(btn, label) {
+  document.querySelectorAll('.sq-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSQ = label;
+}
+function saveSleep() {
+  const bed  = document.getElementById('sleep-bed').value;
+  const wake = document.getElementById('sleep-wake').value;
+  const note = document.getElementById('sleep-note').value.trim();
+  if (!bed || !wake) { alert('Please set your bedtime and wake time 🌙'); return; }
+  const [bh, bm] = bed.split(':').map(Number);
+  const [wh, wm] = wake.split(':').map(Number);
+  let mins = (wh * 60 + wm) - (bh * 60 + bm);
+  if (mins < 0) mins += 1440;
+  const hrs = (mins / 60).toFixed(1);
+  sleepLog.unshift({
+    bed, wake, hours: hrs, quality: selectedSQ || '—', note,
+    date: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' })
+  });
+  if (sleepLog.length > 30) sleepLog.pop();
+  localStorage.setItem('s_sleep', JSON.stringify(sleepLog));
+  document.getElementById('sleep-note').value = '';
+  selectedSQ = null;
+  document.querySelectorAll('.sq-btn').forEach(b => b.classList.remove('selected'));
+  renderSleep();
+  alert('Sleep logged 🌙 Rest is self-care.');
+}
+function renderSleep() {
+  const el = document.getElementById('sleep-log-list');
+  if (!sleepLog.length) {
+    el.innerHTML = '<p style="font-size:0.88rem;color:var(--text-soft)">Your sleep log will appear here. 🌙</p>';
+    return;
+  }
+  el.innerHTML = sleepLog.slice(0, 10).map(s =>
+    `<div class="sleep-log-item">
+       <span class="sleep-emoji">🌙</span>
+       <div class="sleep-detail">
+         <strong>${s.date}</strong><br>
+         ${s.bed} → ${s.wake} · ${s.quality}${s.note ? '<br><em>' + s.note + '</em>' : ''}
+       </div>
+       <div class="sleep-hours">${s.hours}h</div>
+     </div>`
+  ).join('');
+}
+
+// ── STORIES ──
+const stories = {
+  hope: [
+    { title:"The Sunrise She Almost Missed", meta:"2 min read · Hope", body:`There was a woman who, for months, kept her curtains drawn. The world outside felt too bright, too busy, too much. One morning her little niece crept into her room and tugged on her sleeve: "Auntie, come see — the sky is pink!"\n\nShe almost said no. But she didn't.\n\nShe shuffled to the window, and there it was — the most ordinary sunrise, just pink and gold over the rooftops. Nothing magical. Nothing that solved a single thing. But for that one moment, she felt — present.\n\nThat was the first morning she thought: maybe I don't have to fix everything today. Maybe I just have to be here for this one sunrise.\n\nShe still struggles. But she opens the curtains now.` },
+    { title:"One Seed", meta:"1 min read · Hope", body:`A man planted a seed and forgot about it for weeks. When he finally looked, there was a tiny green shoot — fragile, impossibly small, pushing through hard earth.\n\nHe had done nothing. And yet, something had persisted.\n\nThat is what hope is. Not loud or dramatic. Just a quiet, stubborn aliveness — pushing through, even when nobody is watching, even when you've almost given up on it.\n\nYou have that same stubborn aliveness in you.` },
+    { title:"The Letter She Never Sent", meta:"2 min read · Hope", body:`She wrote a letter to her future self every year on her birthday. Not a happy letter — an honest one. About how tired she was. About how small everything felt.\n\nFive years later, she found the old ones in a drawer.\n\nShe read them slowly, one by one.\n\nAnd she realised: every single version of herself who had written those letters — exhausted, uncertain, barely holding on — had made it to the next year. Every one.\n\nShe picked up a pen and wrote again. This time, she added one new line at the end: "You have always found a way. You will find one again."\n\nShe believed it, a little, this time.` },
+    { title:"Rain After a Long Drought", meta:"2 min read · Hope", body:`The farmers had almost stopped looking at the sky. Weeks without rain. The earth cracked and the crops bent low.\n\nThen one evening, a child ran inside shouting: "It smells different outside!"\n\nThe old woman knew that smell. Petrichor — the scent of rain meeting dry earth. It means the water is coming. It means the ground is ready to receive.\n\nSometimes, before the breakthrough, there is just a smell. A feeling. Something in the air that whispers: it is coming.\n\nYour rain is coming. The ground in you is ready.` },
+    { title:"The Fisherman's Patience", meta:"2 min read · Hope", body:`A young man asked an old fisherman why he came to the lake every morning, even on the days he caught nothing.\n\n"Because some days I catch fish," the old man said simply. "And I never know which day that will be until I'm already here."\n\nShowing up — even when nothing seems to be happening — is itself an act of hope. You cannot know which ordinary morning will be the one that changes everything.\n\nKeep coming back to the lake.` },
+    { title:"Morning Number 847", meta:"2 min read · Hope", body:`She had kept count, though she never told anyone. Eight hundred and forty-seven mornings of waking up and not wanting to. Of lying still, waiting for the weight to lift enough to stand.\n\nBut she had also kept a quieter count: eight hundred and forty-seven times, she had eventually stood up.\n\nNot always gracefully. Not always early. Sometimes it was 2pm before she was upright. But upright, nonetheless.\n\nMorning number eight hundred and forty-eight came. She stood up again.\n\nThat is not nothing. That is everything.` }
+  ],
+  calm: [
+    { title:"The River Doesn't Rush", meta:"2 min read · Calm", body:`A girl once asked the river why it wasn't in a hurry.\n\nThe river said: "I'm not going nowhere — I'm going everywhere. But I only ever have to be here, at this bend, right now. The sea will still be there when I arrive."\n\nThere is no moment you need to rush to. The future will be there. The only thing you ever actually have to navigate is right here, right now, at this particular bend.\n\nBreathe. You're already where you need to be.` },
+    { title:"The Tea Cup", meta:"1 min read · Calm", body:`Every evening she made one cup of tea. Not because tea solved anything. But because for those three minutes of boiling water, pouring, watching the colour bloom and spread — her mind had nowhere else to be.\n\nThree minutes of nowhere else to be.\n\nSometimes that is all healing asks of you today.` },
+    { title:"The Hammock", meta:"2 min read · Calm", body:`He used to think rest had to be earned. You work hard, then you rest. You finish everything, then you breathe.\n\nBut one afternoon, exhausted beyond earning anything, he lay in the hammock in the garden before the work was done.\n\nThe trees swayed. A bird called once, twice, then went quiet. The sky was the kind of blue that has no bottom to it.\n\nNothing was finished. But for that hour, he was not behind. He was just — here. In the hammock. Breathing.\n\nRest does not have to be deserved. It is not a reward. It is a necessity. You are allowed to rest now, even now.` },
+    { title:"What the Moon Knows", meta:"1 min read · Calm", body:`The moon does not apologise for not being the sun.\n\nIt does not burn bright all day, blazing and relentless. It glows softly. It waxes and wanes without shame. It disappears completely for a few nights every month — and then, quietly, returns.\n\nYou are allowed to be more moon than sun. Soft. Cyclical. Sometimes barely visible.\n\nYou are still illuminating the night.` },
+    { title:"Still Water", meta:"1 min read · Calm", body:`Drop a stone in still water and the rings spread out wide, gently, getting smaller as they go.\n\nBut the water returns to stillness. It always does.\n\nYour mind is like that water. Thoughts drop in — a worry, a memory, a fear — and they ripple. That is natural. That is what water does.\n\nBut underneath every ripple, the stillness is waiting. It has not gone anywhere. It is always there, just below the surface.\n\nBreathe down to the still water. It is yours.` },
+    { title:"The Sleeping Cat", meta:"1 min read · Calm", body:`A cat can sleep in a sunbeam for three hours and feel absolutely no guilt about it.\n\nNo wondering if it should be doing something else. No rehearsing tomorrow. No replaying yesterday. Just warm light, closed eyes, slow breath.\n\nSomewhere along the way, humans forgot how to do this.\n\nYou don't have to be a cat. But you can borrow the lesson: this moment, this warmth, this breath — it is enough. You are allowed to simply be in it.` }
+  ],
+  strength: [
+    { title:"She Did It Afraid", meta:"2 min read · Strength", body:`People always assumed she was fearless. She laughed when they said it.\n\n"I'm afraid every single day," she told her friend. "I'm afraid of failing. Of being judged. Of not being enough."\n\n"Then how do you keep going?" her friend asked.\n\nShe thought about it. "I stopped waiting to not be afraid. I just... do it afraid. Apparently that's what brave looks like from the inside."\n\nYou don't need to feel strong to be strong. You just need to take one more step, afraid and all.` },
+    { title:"Broken and Growing", meta:"1 min read · Strength", body:`In Japan, broken pottery is sometimes repaired with gold. The cracks are not hidden — they are made beautiful. The philosophy is called kintsugi: the art of precious scars.\n\nYour breaks are not something to hide. They are part of what makes you rare.\n\nYou are not damaged. You are kintsugi.` },
+    { title:"The Tree in the Storm", meta:"2 min read · Strength", body:`During a storm, a young tree bends dramatically — branches whipping, trunk swaying, looking as though it must surely break.\n\nBut a tree that cannot bend does break. It is the bending that saves it.\n\nAnd after the storm, the tree that bent is standing. A little reshaped, perhaps. New angles to its branches. But standing.\n\nYou have bent in so many storms. You are still standing.\n\nThe bending was never weakness. It was the very thing that kept you whole.` },
+    { title:"The Smallest Version of Brave", meta:"2 min read · Strength", body:`Brave doesn't always look like climbing mountains.\n\nSometimes brave looks like sending a message to someone you've been avoiding. Sometimes it looks like eating a full meal when your body feels like a stranger. Sometimes it looks like going to sleep even though your mind is loud, because you know morning is kinder than 3am.\n\nSometimes the smallest version of brave is just staying. Just enduring one more hour.\n\nThat counts. That is real courage. Nobody can tell you otherwise.` },
+    { title:"After the Fire", meta:"2 min read · Strength", body:`After a forest fire, the land looks like ruin. Black earth, bare trees, silence where birds used to be.\n\nBut look closer, weeks later. Green shoots pushing through ash. Seeds that only crack open in intense heat — seeds that needed the fire to release them.\n\nSome of the most extraordinary growth happens in the place that was most devastated.\n\nYou have been through fire. Something in you cracked open that only fire could reach.\n\nLook for the green shoots. They are coming.` },
+    { title:"She Rebuilt It Smaller", meta:"2 min read · Strength", body:`After everything fell apart, she didn't try to rebuild her old life. She had watched people do that — frantically recreating what they had lost, brick by brick, only to feel hollow when it was done.\n\nInstead, she built something smaller. A life that fit her actual self, not the self she used to perform.\n\nFewer things. Fewer people. More silence. More honesty.\n\nIt looked like less from the outside. It felt like more on the inside.\n\nSometimes falling apart is just making space for something more true.` }
+  ],
+  mindful: [
+    { title:"Five Seconds of Sky", meta:"1 min read · Mindful", body:`He had been told: when overwhelmed, look up.\n\nHe tried it. Just five seconds of sky. Blue-grey, with a single white cloud moving so slowly you could barely tell it was moving at all.\n\nSomething in him settled.\n\nNot because the sky fixed anything. But because for five seconds, he was reminded: the world is vast, and unhurried, and you are a small, beloved part of it.\n\nLook up. Five seconds. Try it now.` },
+    { title:"The Weight of Right Now", meta:"2 min read · Mindful", body:`We carry yesterday like a stone, and tomorrow like an anchor.\n\nBut right now — this exact second — weighs almost nothing. This second is just breath in, breath out. The feeling of your feet on the floor. The temperature of the air.\n\nRight now is light.\n\nWhen the stone and the anchor feel too heavy, come back to the lightness of right now. Not forever. Just for this breath. Then this one. Then the next.` },
+    { title:"The Bread and the Hands", meta:"2 min read · Mindful", body:`Her therapist once told her: when anxiety spikes, do something with your hands.\n\nShe started making bread. Not because she loved baking. But because kneading dough demanded everything — both hands pressing, folding, turning. No hand free to scroll, to worry, to pick at old wounds.\n\nJust flour and warmth and the smell of yeast and her own two hands working.\n\nFor those twenty minutes, she was nowhere but the bread.\n\nFind your bread. The thing that asks for your full hands and nothing else. That is your anchor.` },
+    { title:"Three Things True Right Now", meta:"1 min read · Mindful", body:`When the spiral begins — when thoughts chase thoughts chase thoughts — try stopping. Just for a moment.\n\nAsk yourself: what are three things that are true right now? Not feelings. Not fears. Facts.\n\n"The floor is solid under my feet." "The air is cool." "The light is on."\n\nThree small, boring, absolutely real things.\n\nYou cannot be fully in a panic spiral and fully in the present moment at the same time. Facts pull you back.\n\nThree things. Real and true. Right now.` },
+    { title:"The Space Between Thoughts", meta:"2 min read · Mindful", body:`People think meditation means silencing the mind. It doesn't. The mind never goes quiet — that is not what minds do.\n\nWhat meditation actually offers is something smaller and more extraordinary: the ability to notice the space between thoughts.\n\nA thought arises. And then — just before the next one — there is a tiny gap. A breath. A moment of pure quiet.\n\nYou cannot make the gap bigger by force. But you can notice it. And each time you notice it, it stretches, just a little.\n\nYou don't need to empty your mind. You just need to find the gaps. They are already there.` },
+    { title:"Barefoot on Grass", meta:"1 min read · Mindful", body:`It sounds almost too simple.\n\nTake off your shoes. Step onto grass — or earth, or sand, or any ground that is not concrete. Feel the texture under your feet. Uneven. Cool or warm. Alive.\n\nStand there for sixty seconds. Not as a cure. Not as a solution. Just as a reminder: you have a body. Your body is on the earth. The earth is holding you up.\n\nYou are not floating. You are not falling. You are held.\n\nSixty seconds, barefoot. That is all.` }
+  ]
+};
+let currentCategory = 'hope', currentStoryIdx = 0;
+
+function setStoryCategory(btn, cat) {
+  document.querySelectorAll('.story-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCategory = cat;
+  currentStoryIdx = 0;
+  renderStory();
+}
+function renderStory() {
+  const arr = stories[currentCategory];
+  const s = arr[currentStoryIdx];
+  document.getElementById('story-title').textContent = s.title;
+  document.getElementById('story-meta').textContent = '✦ ' + s.meta + '  ·  ' + (currentStoryIdx + 1) + ' of ' + arr.length;
+  document.getElementById('story-body').innerHTML = s.body.replace(/\n/g, '<br><br>');
+}
+function nextStory() {
+  currentStoryIdx = (currentStoryIdx + 1) % stories[currentCategory].length;
+  renderStory();
+}
+function prevStory() {
+  currentStoryIdx = (currentStoryIdx - 1 + stories[currentCategory].length) % stories[currentCategory].length;
+  renderStory();
+}
+
+// ── PRIVACY — DATA STATS ──
+function renderDataStats() {
+  const moods    = JSON.parse(localStorage.getItem('s_mood')    || '[]');
+  const journals = JSON.parse(localStorage.getItem('s_journal') || '[]');
+  const sleeps   = JSON.parse(localStorage.getItem('s_sleep')   || '[]');
+  const el = document.getElementById('data-stats');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="stat-pill">🌈 Moods <strong>${moods.length}</strong></div>
+    <div class="stat-pill">📖 Journal entries <strong>${journals.length}</strong></div>
+    <div class="stat-pill">🌙 Sleep logs <strong>${sleeps.length}</strong></div>
+  `;
+}
+
+// ── DOWNLOAD PROGRESS ──
+function downloadData(format) {
+  const moods    = JSON.parse(localStorage.getItem('s_mood')    || '[]');
+  const journals = JSON.parse(localStorage.getItem('s_journal') || '[]');
+  const sleeps   = JSON.parse(localStorage.getItem('s_sleep')   || '[]');
+  const dateStr  = new Date().toISOString().slice(0, 10);
+
+  if (format === 'json') {
+    const data = {
+      exportedAt: new Date().toLocaleString(),
+      app: 'Gentle Steps',
+      note: 'This data is private and was stored only on your device.',
+      moods, journals, sleeps
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+    triggerDownload(blob, `gentle-steps-my-data-${dateStr}.json`);
+    return;
+  }
+
+  // TXT format
+  let out = '═══════════════════════════════════════════\n';
+  out += '  GENTLE STEPS — My Private Progress Export\n';
+  out += '═══════════════════════════════════════════\n';
+  out += `Exported: ${new Date().toLocaleString()}\n`;
+  out += 'This file was generated on your device and never sent anywhere.\n\n';
+
+  out += `── MOOD LOG (${moods.length} entries) ──\n`;
+  if (moods.length) {
+    moods.forEach(m => {
+      out += `[${m.date} · ${m.time}]  ${m.emoji} ${m.label}`;
+      if (m.note) out += `\n   Note: ${m.note}`;
+      out += '\n';
+    });
+  } else {
+    out += '  No mood entries yet.\n';
+  }
+
+  out += `\n── JOURNAL ENTRIES (${journals.length} entries) ──\n`;
+  if (journals.length) {
+    journals.forEach((j, i) => {
+      out += `\n[${i + 1}] ${j.date} · ${j.time}\n`;
+      out += j.text + '\n';
+      out += '---\n';
+    });
+  } else {
+    out += '  No journal entries yet.\n';
+  }
+
+  out += `\n── SLEEP LOG (${sleeps.length} entries) ──\n`;
+  if (sleeps.length) {
+    sleeps.forEach(s => {
+      out += `[${s.date}]  ${s.bed} → ${s.wake}  (${s.hours}h)  Quality: ${s.quality}`;
+      if (s.notes) out += `\n   Notes: ${s.notes}`;
+      out += '\n';
+    });
+  } else {
+    out += '  No sleep logs yet.\n';
+  }
+
+  out += '\n═══════════════════════════════════════════\n';
+  out += 'End of export. Keep going — you are doing great. 💛\n';
+
+  const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+  triggerDownload(blob, `gentle-steps-my-data-${dateStr}.txt`);
+}
+
+function triggerDownload(blob, filename) {
+  const url  = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href     = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+
+// ── CLEAR DATA ──
+function clearAllData() {
+  if (confirm('This will permanently delete all your moods, journal entries, and sleep logs from this device.\n\nAre you sure?')) {
+    localStorage.removeItem('s_mood');
+    localStorage.removeItem('s_journal');
+    localStorage.removeItem('s_sleep');
+    moodLog = []; journalLog = []; sleepLog = [];
+    renderDataStats();
+    alert('All data cleared. 🌸 Your slate is clean.');
+  }
+}
+
+// ── GENTLE REMINDERS ──
+const reminders = [
+  "💧 Have you had a glass of water recently?",
+  "🌬️ Take 3 slow deep breaths right now.",
+  "🌸 You've made it through every hard day so far.",
+  "🙏 Name one thing, however small, you're grateful for.",
+  "🚶 Even a 5-minute walk can shift your mood.",
+  "💤 How is your sleep this week? Consider logging it."
+];
+let reminderIdx = 0;
+setInterval(() => {
+  reminderIdx = (reminderIdx + 1) % reminders.length;
+  const bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#3a9494,#5aaed4);color:white;padding:13px 24px;border-radius:24px;font-family:Nunito,sans-serif;font-size:0.9rem;font-weight:700;z-index:9999;box-shadow:0 4px 18px rgba(58,148,148,0.4);animation:fadeUp 0.4s ease;max-width:90vw;text-align:center;transition:opacity 0.5s;';
+  bar.textContent = reminders[reminderIdx];
+  document.body.appendChild(bar);
+  setTimeout(() => {
+    bar.style.opacity = '0';
+    setTimeout(() => bar.remove(), 500);
+  }, 5000);
+}, 180000);
+
+// ── CONNECTION BADGE ──
+function updateConnectionBadge() {
+  const badge = document.getElementById('connection-badge');
+  if (!badge) return;
+  badge.textContent = navigator.onLine ? '🔒 Private · Online' : '✈️ Offline Mode';
+  badge.style.background = navigator.onLine ? 'var(--sage)' : '#5aab9e';
+}
+window.addEventListener('online',  updateConnectionBadge);
+window.addEventListener('offline', updateConnectionBadge);
+updateConnectionBadge();
+
+// ── INIT ──
+renderMoodLog();
+renderJournal();
+renderSleep();
+renderStory();
+
+// ── THEME SYSTEM ──
+const themes = [
+  { id:'teal',    name:'Teal (Default)',  primary:'#3a9494', secondary:'#5aaed4', accent:'#6dbdaa', bg:'linear-gradient(150deg,#e4f4f4 0%,#d8eef7 35%,#e0e8f8 68%,#ebe4f5 100%)', swatch:'#3a9494' },
+  { id:'lavender',name:'Lavender',        primary:'#7c6db0', secondary:'#a091cc', accent:'#b8aee0', bg:'linear-gradient(150deg,#ede8f8 0%,#e0d8f7 35%,#ddd6f5 68%,#f0ebff 100%)', swatch:'#7c6db0' },
+  { id:'rose',    name:'Rose',            primary:'#b05c7a', secondary:'#d47a97', accent:'#e8a0b8', bg:'linear-gradient(150deg,#fce8ee 0%,#f7d8e4 35%,#f5dce8 68%,#ffe4ec 100%)', swatch:'#b05c7a' },
+  { id:'sage',    name:'Forest Sage',     primary:'#5a8a5a', secondary:'#7aaa7a', accent:'#90c090', bg:'linear-gradient(150deg,#e8f4e8 0%,#d8eed8 35%,#dceedc 68%,#eaf5ea 100%)', swatch:'#5a8a5a' },
+  { id:'sunset',  name:'Sunset',          primary:'#c07040', secondary:'#d89060', accent:'#e8b080', bg:'linear-gradient(150deg,#fdf0e4 0%,#f8e4cc 35%,#f5e4d0 68%,#fff0e0 100%)', swatch:'#c07040' },
+  { id:'ocean',   name:'Deep Ocean',      primary:'#2a6a9a', secondary:'#4a8aba', accent:'#70a8d0', bg:'linear-gradient(150deg,#e0eef8 0%,#cce4f4 35%,#d4e8f8 68%,#dde8f8 100%)', swatch:'#2a6a9a' },
+  { id:'midnight',name:'Midnight',        primary:'#8a8ab0', secondary:'#a0a0c8', accent:'#b8b8d8', bg:'linear-gradient(150deg,#1c1c2e 0%,#16213e 35%,#0f3460 68%,#1c1c2e 100%)', swatch:'#1c1c2e', dark:true },
+];
+
+let currentTheme = localStorage.getItem('gs_theme') || 'teal';
+
+function applyTheme(id) {
+  const t = themes.find(th => th.id === id) || themes[0];
+  const r = document.documentElement.style;
+  r.setProperty('--rose',      t.primary);
+  r.setProperty('--peach',     t.accent);
+  r.setProperty('--gold',      t.accent);
+  r.setProperty('--sage',      t.secondary);
+  r.setProperty('--sky',       t.secondary);
+  r.setProperty('--lavender',  t.secondary);
+  document.body.style.background = t.bg;
+  if (t.dark) {
+    r.setProperty('--cream',      '#1e2240');
+    r.setProperty('--warm-white', '#1a1d30');
+    r.setProperty('--text',       '#dde4f0');
+    r.setProperty('--text-soft',  '#8fa0c0');
+    r.setProperty('--card-bg',    'rgba(30,34,64,0.88)');
+    r.setProperty('--shadow',     '0 8px 32px rgba(0,0,30,0.35)');
+    document.querySelector('nav').style.background = 'rgba(22,25,48,0.96)';
+  } else {
+    r.setProperty('--cream',      '#eef6f6');
+    r.setProperty('--warm-white', '#f4fafa');
+    r.setProperty('--text',       '#1c3838');
+    r.setProperty('--text-soft',  '#477070');
+    r.setProperty('--card-bg',    'rgba(255,255,255,0.84)');
+    r.setProperty('--shadow',     '0 8px 32px rgba(70,140,140,0.10)');
+    document.querySelector('nav').style.background = '';
+  }
+  currentTheme = id;
+  localStorage.setItem('gs_theme', id);
+  document.querySelectorAll('.theme-swatch').forEach(s => {
+    s.classList.toggle('active', s.dataset.theme === id);
+  });
+}
+
+function buildSwatches(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = themes.map(t =>
+    `<div class="theme-swatch${t.id === currentTheme ? ' active' : ''}"
+      data-theme="${t.id}" title="${t.name}"
+      style="background:${t.swatch};${t.dark ? 'border:2px solid #555;' : ''}"
+      onclick="selectTheme('${t.id}')"></div>`
+  ).join('');
+}
+
+function selectTheme(id) {
+  applyTheme(id);
+  buildSwatches('desktop-swatches');
+  buildSwatches('mobile-swatches');
+}
+
+function toggleThemePopover(e) {
+  e.stopPropagation();
+  document.getElementById('theme-popover').classList.toggle('open');
+}
+document.addEventListener('click', () => {
+  document.getElementById('theme-popover').classList.remove('open');
+});
+
+// ── MOBILE MENU ──
+function openMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function mobileNav(id) {
+  showPage(id, null);
+  document.querySelectorAll('.menu-nav-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes("'" + id + "'"));
+  });
+  closeMobileMenu();
+}
+
+// ── INIT THEMES ──
+buildSwatches('desktop-swatches');
+buildSwatches('mobile-swatches');
+applyTheme(currentTheme);
+
+// ── SERVICE WORKER (inline blob for full offline support) ──
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE = 'gentle-steps-v2';
+    self.addEventListener('install', e => { self.skipWaiting(); });
+    self.addEventListener('activate', e => { e.waitUntil(clients.claim()); });
+    self.addEventListener('fetch', e => {
+      if (!e.request.url.startsWith('http')) return;
+      e.respondWith(
+        caches.match(e.request).then(cached => {
+          if (cached) return cached;
+          return fetch(e.request).then(resp => {
+            if (resp && resp.status === 200) {
+              const clone = resp.clone();
+              caches.open(CACHE).then(c => c.put(e.request, clone));
+            }
+            return resp;
+          }).catch(() => cached || new Response('Offline', { status: 503 }));
+        })
+      );
+    });
+  `;
+  const swBlob = new Blob([swCode], { type: 'application/javascript' });
+  navigator.serviceWorker.register(URL.createObjectURL(swBlob))
+    .then(() => console.log('Gentle Steps: offline mode active ✅'))
+    .catch(err => console.log('SW note:', err.message));
+}
+</script>
+</body>
+</html>
